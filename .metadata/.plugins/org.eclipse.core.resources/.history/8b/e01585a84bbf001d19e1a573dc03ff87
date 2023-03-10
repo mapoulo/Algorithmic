@@ -1,0 +1,64 @@
+package com.example.demo.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.hibernate.ObjectNotFoundException;
+import org.hibernate.PropertyNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.Entity.MyOder;
+import com.example.demo.Repository.MyOderRepo;
+
+@Service
+public class MyOderService {
+	
+	@Autowired
+	private MyOderRepo repo;
+	
+	
+	public MyOder saveMyOder(MyOder MyOder) {
+		return repo.save(MyOder);
+	}
+	
+	
+	public List<MyOder> getAllMyOders(){
+		return repo.findAll();
+	}
+	
+	
+	public String deleteMyOderById(MyOder MyOder) {
+		if(MyOder == null || MyOder.getId() == 0){
+			throw new PropertyNotFoundException("The id field cannot be empty");
+		}
+		
+		Optional<MyOder> optionalBook = repo.findById(MyOder.getId());
+		if(!optionalBook.isPresent()) {
+			throw new ObjectNotFoundException("Object Not Found", optionalBook);
+		}
+		
+		repo.deleteById(MyOder.getId());
+		return "MyOder with id "+MyOder.getId()+" is deleted successfully";
+	}
+	
+	
+	public MyOder updateMyOder(MyOder MyOder) {
+		if(MyOder == null || MyOder.getId() == 0){
+			throw new PropertyNotFoundException("The id field cannot be empty");
+		}
+		
+		Optional<MyOder> optionalBook = repo.findById(MyOder.getId());
+		if(!optionalBook.isPresent()) {
+			throw new ObjectNotFoundException("Object Not Found", optionalBook);
+		}
+		
+		MyOder existingBook = MyOder.builder()
+				.quantity(MyOder.getQuantity()).build();
+		return repo.save(existingBook);
+	}
+
+
+
+
+}

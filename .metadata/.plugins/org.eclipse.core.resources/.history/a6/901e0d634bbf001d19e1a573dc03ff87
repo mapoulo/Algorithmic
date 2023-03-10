@@ -1,0 +1,64 @@
+package com.example.demo.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.hibernate.ObjectNotFoundException;
+import org.hibernate.PropertyNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.Entity.Order;
+import com.example.demo.Repository.OrderRepo;
+
+@Service
+public class OrderService {
+	
+	@Autowired
+	private OrderRepo repo;
+	
+	
+	public Order saveOrder(Order order) {
+		return repo.save(order);
+	}
+	
+	
+	public List<Order> getAllOrders(){
+		return repo.findAll();
+	}
+	
+	
+	public String deleteOrderById(Order order) {
+		if(order == null || order.getId() == 0){
+			throw new PropertyNotFoundException("The id field cannot be empty");
+		}
+		
+		Optional<Order> optionalBook = repo.findById(order.getId());
+		if(!optionalBook.isPresent()) {
+			throw new ObjectNotFoundException("Object Not Found", optionalBook);
+		}
+		
+		repo.deleteById(order.getId());
+		return "Order with id "+order.getId()+" is deleted successfully";
+	}
+	
+	
+	public Order updateOrder(Order order) {
+		if(order == null || order.getId() == 0){
+			throw new PropertyNotFoundException("The id field cannot be empty");
+		}
+		
+		Optional<Order> optionalBook = repo.findById(order.getId());
+		if(!optionalBook.isPresent()) {
+			throw new ObjectNotFoundException("Object Not Found", optionalBook);
+		}
+		
+		Order existingBook = Order.builder()
+				.quantity(order.getQuantity()).build();
+		return repo.save(existingBook);
+	}
+
+
+
+
+}
