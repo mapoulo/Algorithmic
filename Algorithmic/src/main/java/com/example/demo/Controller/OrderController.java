@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,7 @@ public class OrderController {
 	
 	
 	@DeleteMapping("/delete/{id}")
-	public String deleteMyOrder(@Validated @PathVariable int id) {
+	public ResponseEntity<String> deleteMyOrder(@Validated @PathVariable int id) {
 		return service.deleteMyOrderById(id);
 	}
 	

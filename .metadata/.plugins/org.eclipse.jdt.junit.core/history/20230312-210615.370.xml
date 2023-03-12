@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun OrderControllerTest (Failed Tests first)" project="Algorithmic" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="com.example.demo.OrderControllerTest" time="0.624" displayname="OrderControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.example.demo.OrderControllerTest]">
+    <testcase name="getAllOrders" classname="com.example.demo.OrderControllerTest" time="0.579" displayname="getAllOrders()" uniqueid="[engine:junit-jupiter]/[class:com.example.demo.OrderControllerTest]/[method:getAllOrders()]"/>
+    <testcase name="saveOrderTest" classname="com.example.demo.OrderControllerTest" time="0.044" displayname="saveOrderTest()" uniqueid="[engine:junit-jupiter]/[class:com.example.demo.OrderControllerTest]/[method:saveOrderTest()]"/>
+  </testsuite>
+</testrun>

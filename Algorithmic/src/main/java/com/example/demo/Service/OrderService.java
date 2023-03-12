@@ -1,16 +1,20 @@
 package com.example.demo.Service;
 
+import java.awt.print.Book;
 import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.ObjectNotFoundException;
-import org.hibernate.PropertyNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Entity.MyOrder;
+import com.example.demo.Exceptions.MyOrderNotFoundException;
 import com.example.demo.Repository.OrderRepo;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -31,17 +35,6 @@ public class OrderService {
 	}
 	
 	
-	public String deleteMyOrderById(int id) {
-		Optional<MyOrder> optionalBook = repo.findById(id);
-		if(!optionalBook.isPresent()) {
-			throw new ObjectNotFoundException("Object Not Found", optionalBook);
-		}
-		
-		repo.deleteById(id);
-		return "MyOrder with id "+id+" is deleted successfully";
-	}
-	
-	
 	public MyOrder updateMyOrder(int id, int quantity) {
 		Optional<MyOrder> optionalBook = repo.findById(id);
 		if(!optionalBook.isPresent()) {
@@ -58,6 +51,20 @@ public class OrderService {
 	
 
 
-
+	@Transactional
+	public ResponseEntity<String> deleteMyOrderById(int id) {
+	    Optional<MyOrder> optionalMyOrder = repo.findById(id);
+	    if (optionalMyOrder.isPresent()) {
+	        MyOrder existingMyOrder = optionalMyOrder.get();
+	        try {
+	            repo.deleteById(id);
+	            return new ResponseEntity<String>("MyOrder deleted successfully!", HttpStatus.OK);
+	        } catch (Exception e) {
+	            throw new RuntimeException("Failed to delete MyOrder with id " + id, e);
+	        }
+	    } else {
+	        throw new MyOrderNotFoundException("MyOrder with id " + id + " is not found");
+	    }  
+	}
 
 }

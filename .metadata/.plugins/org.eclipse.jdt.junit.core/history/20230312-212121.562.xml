@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun OrderControllerTest (Failed Tests first)" project="Algorithmic" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="com.example.demo.OrderControllerTest" time="0.676" displayname="OrderControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.example.demo.OrderControllerTest]">
+    <testcase name="getAllOrders" classname="com.example.demo.OrderControllerTest" time="0.534" displayname="getAllOrders()" uniqueid="[engine:junit-jupiter]/[class:com.example.demo.OrderControllerTest]/[method:getAllOrders()]"/>
+    <testcase name="deleteMyOrderById" classname="com.example.demo.OrderControllerTest" time="0.083" displayname="deleteMyOrderById()" uniqueid="[engine:junit-jupiter]/[class:com.example.demo.OrderControllerTest]/[method:deleteMyOrderById()]"/>
+    <testcase name="saveOrderTest" classname="com.example.demo.OrderControllerTest" time="0.042" displayname="saveOrderTest()" uniqueid="[engine:junit-jupiter]/[class:com.example.demo.OrderControllerTest]/[method:saveOrderTest()]"/>
+    <testcase name="deleteMyOrderById_MyOrderNotFound" classname="com.example.demo.OrderControllerTest" time="0.014" displayname="deleteMyOrderById_MyOrderNotFound()" uniqueid="[engine:junit-jupiter]/[class:com.example.demo.OrderControllerTest]/[method:deleteMyOrderById_MyOrderNotFound()]"/>
+  </testsuite>
+</testrun>
